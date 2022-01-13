@@ -20,6 +20,14 @@ function process() {
     printf "\n${GREY}[*] $@${RESET}\n"
 }
 
+function nfound() {
+    printf "${GREY}[-] $@${RESET}\n"
+}
+
+function found() {
+    printf "${GREEN}[+] $@${RESET}\n"
+}
+
 function success() {
     printf "${GREEN}[+] $@${RESET}\n"
 }

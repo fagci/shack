@@ -6,13 +6,15 @@ DIR="$(dirname "$0")"
 VULN_DICT="${DIR}/data/web/vulns/potential.txt"
 
 target="$1"
-base="${target}"
-host=$(grep -Eo '(?:[^:]*://)?([^/]+\.[^/]+)' <<< "$base")
 
 source "${DIR}/lib/base.sh"
+source "${DIR}/lib/net.sh"
 source "${DIR}/lib/http.sh"
 
-printf "Target: ${target}\n"
+base="${target}"
+host=$(get_hostname "${base}")
+
+info "Target: ${target}"
 
 process "Check path misconfigs..."
 

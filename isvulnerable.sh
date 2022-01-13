@@ -7,7 +7,7 @@ VULN_DICT="${DIR}/data/web/vulns/potential.txt"
 
 target="$1"
 base="${target}"
-host=$(grep -Eo '(?:[^:]*:\/\/)?([^\/]+\.[^\/]+)' <<< "$base")
+host=$(grep -Eo '(?:[^:]*://)?([^/]+\.[^/]+)' <<< "$base")
 
 source "${DIR}/lib/http.sh"
 

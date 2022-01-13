@@ -11,7 +11,7 @@ source "${DIR}/lib/base.sh"
 source "${DIR}/lib/net.sh"
 source "${DIR}/lib/http.sh"
 
-grep -o '^http' <<< "$target" || target="https://${target}"
+grep -q '^http' <<< "$target" || target="https://${target}"
 
 base="${target}"
 host=$(get_hostname "$base")

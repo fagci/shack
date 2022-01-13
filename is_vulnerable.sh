@@ -11,14 +11,16 @@ source "${DIR}/lib/base.sh"
 source "${DIR}/lib/net.sh"
 source "${DIR}/lib/http.sh"
 
-base="${target}"
-host=$(get_hostname "${base}")
+grep -o '^http' <<< "$target" || target="https://${target}"
 
-info "Target: ${target}"
+base="${target}"
+host=$(get_hostname "$base")
+
+info "Target: $target"
 
 process "Check path misconfigs..."
 
-paths_exists "${base}" "${VULN_DICT}" || echo "No path vulns found."
+paths_exists "$base" "${VULN_DICT}" || echo "No path vulns found."
 
 process "Check domains..."
 

@@ -14,13 +14,10 @@ source "${DIR}/lib/http.sh"
 
 printf "Target: ${target}\n"
 
-info "\nCheck path misconfigs..."
+process "Check path misconfigs..."
 
-xargs -P4 -I@ bash -c "http_ok ${base}@ && echo @" < "${VULN_DICT}" \
-    || echo "No path vulns found."
+paths_exists "${base}" "${VULN_DICT}" || echo "No path vulns found."
 
-info "\nCheck domains..."
+process "Check domains..."
 
-true | openssl s_client -connect "${host}:443" 2>/dev/null \
-    | openssl x509 -noout -text \
-    | sed -En 's#\s*DNS:([^ ,]+)[^D]*#\1 #gp'
+ssl_domains "${host}:443"

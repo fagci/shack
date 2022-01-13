@@ -105,10 +105,9 @@ DIR="$(dirname "$0")"
 source "${DIR}/lib/base.sh"
 
 grep -qE '^[0-9]{1,3}(\.[0-9]{1,3}){3}$' <<< "$ip" || {
-    echo -e "${RED}Not an IP: '${ip}'${RESET}"
-    echo
-    echo "Usage: ${0} <IP>"
-    echo "Example: ${0} \$(curl -s ifconfig.me)"
+    error "Not an IP: '${ip}'\n"
+    info "Usage: ${0} <IP>"
+    info "Example: ${0} \$(curl -s ifconfig.me)"
     exit 255
 }
 

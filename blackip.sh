@@ -97,12 +97,12 @@ lists=(
     "zombie.dnsbl.sorbs.net"
 )
 
-GREEN="\e[1;32m"
-RED="\e[1;31m"
-YELLOW="\e[1;33m"
-RESET="\e[m"
 
 ip="$1"
+
+DIR="$(dirname "$0")"
+
+source "${DIR}/lib/base.sh"
 
 grep -qE '^[0-9]{1,3}(\.[0-9]{1,3}){3}$' <<< "$ip" || {
     echo -e "${RED}Not an IP: '${ip}'${RESET}"

@@ -9,16 +9,17 @@ target="$1"
 base="${target}"
 host=$(grep -Eo '(?:[^:]*://)?([^/]+\.[^/]+)' <<< "$base")
 
+source "${DIR}/lib/base.sh"
 source "${DIR}/lib/http.sh"
 
-echo "Target: ${target}"
+printf "Target: ${target}\n"
 
-echo "Check path misconfigs..."
+info "\nCheck path misconfigs..."
 
 xargs -P4 -I@ bash -c "http_ok ${base}@ && echo @" < "${VULN_DICT}" \
     || echo "No path vulns found."
 
-echo "Check domains..."
+info "\nCheck domains..."
 
 true | openssl s_client -connect "${host}:443" 2>/dev/null \
     | openssl x509 -noout -text \

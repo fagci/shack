@@ -105,7 +105,10 @@ RESET="\e[m"
 ip="$1"
 
 grep -qE '^[0-9]{1,3}(\.[0-9]{1,3}){3}$' <<< "$ip" || {
-    echo "Not an IP: '${ip}'"
+    echo -e "${RED}Not an IP: '${ip}'${RESET}"
+    echo
+    echo "Usage: ${0} <IP>"
+    echo "Example: ${0} \$(curl -s ifconfig.me)"
     exit 255
 }
 

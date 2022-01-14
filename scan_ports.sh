@@ -4,10 +4,9 @@ target="${1:-127.0.0.1}"
 
 ports="$(seq "${2:-1}" "${3:-1024}")"
 
-function check_port() {
-    timeout "${3:-1}" bash -c "echo > /dev/tcp/${1}/${2} && echo $2" 2>/dev/null
-}
+DIR="$(dirname "$0")"
 
-export -f check_port
+source "${DIR}/lib/base.sh"
+source "${DIR}/lib/net.sh"
 
 xargs -P128 -I@ bash -c "check_port ${target} @ 0.25" <<< "$ports"

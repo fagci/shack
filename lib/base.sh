@@ -14,7 +14,7 @@ cat <<EOF
 |___/_| |_|\\__,_|\\___|_|\\_\\ ${GREY}by fagci${RESET}
 ------------------------------------
 EOF
-)\n"
+)\n" >&2
 
 function process() {
     printf "\n${GREY}[*] $@${RESET}\n"

@@ -6,7 +6,8 @@ export TIMEOUT=0.5
 
 function check_port_curl() {
     curl -m "$TIMEOUT" --connect-timeout "$TIMEOUT" \
-        -svo /dev/null "${1}:${2}" 2>&1 \
+        --tcp-fastopen --tcp-nodelay \
+        -svo /dev/null "telnet://${1}:${2}" 2>&1 \
         | grep -Fq Connected
 }
 
